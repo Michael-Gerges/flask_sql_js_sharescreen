@@ -70,6 +70,7 @@ template= """
 <html>
 <head>
 <title> Track Mouse </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript">
 
 let pageCoords = [];
