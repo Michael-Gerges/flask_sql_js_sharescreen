@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Bootstrap Example</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <style>#mycomment{background-color: powderblue; border: .2px solid blue;padding-left: -20px;font-size: larger; padding-right: 150px;font-family: "Comic Sans MS", cursive, sans-serif;font-size: 17px;letter-spacing: 2.8px;word-spacing: 2px;color: #b8643e;font-weight: normal;font-style: italic;font-variant: normal;text-transform: none;text-shadow: 2px 2px 2px #1C6EA4;}</style>
+      <style> main{padding-bottom: 220px}</style!-->
+      <style>footer {background-color: #555;color: white;padding: 15px;}</style>  
+       <!--background-color:f2f2f2; use for lighter color!-->
+
+
+<script>
+let count = 0;
+
+function shortprint(z) {
+  const paragraph = document.createElement("p");
+  paragraph.innerHTML  = z;
+  document.getElementById("mybody").appendChild(paragraph);}
+
+function myfunct() {
+  count ++
+  var x = document.getElementById("demo2").value;
+  if (x.startsWith("Create")){
+    add_element(x)
+    return ''
+  }
+  
+  
+  const paragraph = document.createElement("p");
+  paragraph.id = "newid"  + count
+  paragraph.className  = "alert alert-success"
+  const textnode = document.createTextNode(x);
+  paragraph.appendChild(textnode);
+  const element = document.getElementById("mybody");
+  element.appendChild(paragraph);
+
+  let executor = new Function('a', 'b', x)
+  try{
+    const paragraph2 = document.createElement("p");
+    paragraph2.className  = "alert alert-success"
+    var output= executor()
+
+    paragraph2.id = "outnewid"  + count
+    paragraph2.className  = "alert alert-info"
+    const textnode2 = document.createTextNode(output);
+    paragraph2.appendChild(textnode2)
+    element.appendChild(paragraph2);
+  
+  }
+  catch(err){
+    paragraph.className  = "alert alert-danger"
+    alert("Error " + err)
+    const lbl = document.createElement("span");
+    lbl.className  = "label label-danger"
+    lbl.innerHTML = err
+    
+    }
+}
+//======================================
+function add_element(x){
+  const paragraph = document.createElement("p");
+  paragraph.id = "newid"  + count
+  paragraph.className  = "alert alert-warning"
+  const textnode = document.createTextNode(x);
+  paragraph.appendChild(textnode);
+  const element = document.getElementById("mybody");
+  element.appendChild(paragraph);
+  _tag = x.split("\n")[1].replace("tag: ","") //label 
+
+  _class = x.split("\n")[2].replace("class: ","")
+  _txt = x.split("\n")[3].replace("text: ","")  //<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled> Option three is disabled
+
+  _attlist = x.split("\n")[4].replace("Attribute=value: ","") //type=checkbox  // onclick=this.style.display='none'
+  _id =  x.split("\n")[5].replace("id: ","")
+  _style =  x.split("\n")[6].replace("style: ","") 
+  _content = x.split("\n")[7].replace("content: ","")
+
+  const new_el = document.createElement(_tag);
+  new_el.className = _class;
+  new_el.id = _id
+  let executor = new Function('a', 'b', _content)
+  var output= executor()
+  console.log(_txt)
+  console.log(  output)
+  console.log(_txt + output)
+  new_el.innerHTML = _txt + output
+  new_el.setAttribute("style", _style) 
+  console.log(_style)
+  
+  
+
+
+  try{
+    new_el.setAttribute(_attlist.split("=")[0], _attlist.split("=").slice(1).join("="))
+  }
+  finally{
+    element.appendChild(new_el);
+  }
+
+}
+
+//======================================
+function change_bgc(){
+var clr = document.getElementById("bgc").value;
+let body = document.querySelector('body');
+console.log(clr)
+body.style.backgroundColor = clr;
+ }
+
+
+
+ function put_stru(){
+  var x = document.getElementById("demo2");
+  x.value = "Create:"+"\n" + "tag: div" + "\n" +"class: well well-sm"+ "\n" + "text:  "+"\n" + "Attribute=value: onclick=this.style.display='none'"+"\n" + "id: " +"\n" + "style: background-color:lavenderblush; color:blue  " +"\n" + `content: return '' `
+ }
+
+ //======================================
+//======================================
+
+
+
+
+
+//======================================
+</script> </head><body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">WebSiteName</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+      </ul>
+
+      <button onclick="myfunct()" class="btn btn-danger navbar-btn navbar-left">submit</button>
+      
+      <button onclick="put_stru()" class="btn btn-warning navbar-btn navbar-left">creation structure</button>
+      <textarea id="demo2"  class="form-control" rows="8" placeholder="thats 5 rows text area for the user", value="John"></textarea>
+      <ul class="nav navbar-nav navbar-right">
+        <li><button onclick="change_bgc()" class="btn btn-link">bg color</button></li>
+        <li><input id="bgc" type="color" ></li>
+      </ul>
+ </div>
+</nav>
+
+
+
+<main id="mybody">
+    <p id="demo" class="alert alert-success"><strong>Success!</strong> Welecome to Javascript console.</p>
+</main></body></html>
+
+

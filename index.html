@@ -1,0 +1,20 @@
+
+{% extends "layout.html" %}
+{% block body %}
+<div style="margin-top:50px;, text-align: left;">
+  <fieldset style="text-align:left;">
+    <legend>Query:</legend>
+
+                            <form action="/custom" method="post">
+                              
+                            <label for="Textarea1" class="form-label">Type your Query here!</label>
+                            <textarea rows="8" style="width:95%;" id="Textarea1" "class="form-control"  name=query placeholder="SELECT EmployeeID, LastName FROM Employees" type="text"></textarea>
+                            <input onclick=handleQuery() class="btn btn-primary mb-3" type="submit" value="Submit">
+                            </form></div>
+                            <input style="text-align:left"; class="btn btn-info"  type ="button" onclick = "sayHello()" value = "Say Hello" />
+  </fieldset>
+  <form style="text-align:left;" >
+  <input type="hidden" name=query value="select * from sqlite_master">
+  <button type="sumbit" formmethod="POST" formaction="/custom" formtarget="_blank" class="btn btn-warning" >select * from sqlite_master</button>
+  </form>
+{% endblock %}
